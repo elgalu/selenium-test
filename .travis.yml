@@ -8,6 +8,7 @@ services:
 before_install:
 - docker pull elgalu/selenium:latest
 - docker run -d --name=grid -p 127.0.0.1:4444:24444 -v /dev/shm:/dev/shm elgalu/selenium:latest
+- docker images
 - docker ps -a
 
 install:
