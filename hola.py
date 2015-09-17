@@ -13,6 +13,7 @@ caps = DesiredCapabilities.CHROME
 sel_host = os.environ.get('SEL_HOST','localhost')
 sel_port = os.environ.get('SEL_PORT','4444')
 myselenium = "http://%s:%s/wd/hub" % (sel_host, sel_port)
+print ("Will connect to selenium at %s" % myselenium)
 
 # http://selenium-python.readthedocs.org/en/latest/getting-started.html#using-selenium-with-remote-webdriver
 driver = webdriver.Remote(command_executor=myselenium, desired_capabilities=caps)
@@ -20,38 +21,38 @@ time.sleep(0.5)
 
 # Test: https://code.google.com/p/chromium/issues/detail?id=519952
 pageurl = "http://www.google.com/adwords"
-print "Opening page %s" % pageurl
+print ("Opening page %s" % pageurl)
 driver.get(pageurl)
 time.sleep(0.5)
 
-print "Current title: %s" % driver.title
-print "Asserting 'Google Adwords' in driver.title"
+print ("Current title: %s" % driver.title)
+print ("Asserting 'Google Adwords' in driver.title")
 assert "Google AdWords" in driver.title
 
 pageurl = "http://www.python.org"
-print "Opening page %s" % pageurl
+print ("Opening page %s" % pageurl)
 driver.get(pageurl)
 time.sleep(0.5)
 
-print "Asserting 'Python' in driver.title"
+print ("Asserting 'Python' in driver.title")
 assert "Python" in driver.title
 
-print "Finding element by name: q"
+print ("Finding element by name: q")
 elem = driver.find_element_by_name("q")
 
-print "Sending keys 'pycon'"
+print ("Sending keys 'pycon'")
 elem.send_keys("pycon")
 time.sleep(0.5)
 
-print "Sending RETURN key"
+print ("Sending RETURN key")
 elem.send_keys(Keys.RETURN)
 
-print "Ensure no results were found"
+print ("Ensure no results were found")
 assert "No results found." not in driver.page_source
 
-print "Close driver and clean up"
+print ("Close driver and clean up")
 driver.close()
 time.sleep(0.5)
 
-print "All done. SUCCESS!"
+print ("All done. SUCCESS!")
 driver.quit()

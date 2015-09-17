@@ -29,3 +29,10 @@ Sample output
     Ensure no results were found
     Close driver and clean up
     All done. SUCCESS!
+
+## Sauce Labs
+Works in Sauce Labs via http basic auth:
+
+    export SEL_HOST="${SAUCE_USER}:${SAUCE_KEY}@ondemand.saucelabs.com"
+    export SEL_PORT=80
+    python hola.py
