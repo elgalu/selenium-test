@@ -1,18 +1,22 @@
 sudo: required
 
 language: python
+python:
+  - "2.7"
 
 services:
   - docker
 
+env:
+  - SEL_IMG_TAG=latest
+
 before_install:
-- docker pull elgalu/selenium:latest
-- docker run -d --name=grid -p 127.0.0.1:4444:24444 -v /dev/shm:/dev/shm elgalu/selenium:latest
+- docker pull elgalu/selenium:${SEL_IMG_TAG}
+- docker run -d --name=grid -p 4444:24444 -v /dev/shm:/dev/shm elgalu/selenium:${SEL_IMG_TAG}
 - docker images
 - docker ps -a
 
 install:
-- pip install --upgrade pip
 - pip install --upgrade -r requirements.txt
 
 script:

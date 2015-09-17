@@ -1,9 +1,11 @@
-# Hello world selenium test
+# selenium-test [![Build Status](https://travis-ci.org/elgalu/selenium-test.svg?branch=master)](https://travis-ci.org/elgalu/selenium-test)
+
+Hello world selenium test
 
 ## Requisistes
 
-    python --version #=> Python 2.7.6
-    sudo pip install -U selenium
+    python --version #=> Python 2.7
+    sudo pip install --upgrade -r requirements.txt
 
 ## Clone
 
