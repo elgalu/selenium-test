@@ -11,10 +11,10 @@ services:
   - docker
 
 env:
-  - SEL_IMG_TAG=latest
-  - SEL_PORT=24444
+  - SEL_IMG_TAG=latest SEL_PORT=24444
 
 before_install:
+- echo "tag:${SEL_IMG_TAG} port:${SEL_PORT}"
 - docker pull elgalu/selenium:${SEL_IMG_TAG}
 - docker run --name=grid -d elgalu/selenium:${SEL_IMG_TAG}
 - docker images
