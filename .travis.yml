@@ -4,15 +4,19 @@ language: python
 python:
   - "2.7"
 
+# TODO: add these steps to
+#   https://github.com/travis-ci/docs-travis-ci-com/blob/gh-pages/user/gui-and-headless-browsers.md
+#   http://docs.travis-ci.com/user/gui-and-headless-browsers/
 services:
   - docker
 
 env:
   - SEL_IMG_TAG=latest
+  - SEL_PORT=24444
 
 before_install:
 - docker pull elgalu/selenium:${SEL_IMG_TAG}
-- docker run -d --name=grid -p 4444:24444 -v /dev/shm:/dev/shm elgalu/selenium:${SEL_IMG_TAG}
+- docker run --name=grid -d elgalu/selenium:${SEL_IMG_TAG}
 - docker images
 - docker ps -a
 
@@ -20,6 +24,7 @@ install:
 - pip install --upgrade -r requirements.txt
 
 script:
+- export SEL_HOST=$(docker inspect -f='{{.NetworkSettings.IPAddress}}' grid)
 - python hola.py
 
 after_script:

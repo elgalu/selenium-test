@@ -1,6 +1,7 @@
 # To install the Python client library:
 # pip install -U selenium
 import time
+import os
 
 # Import the Selenium 2 namespace (aka "webdriver")
 from selenium import webdriver
@@ -9,7 +10,9 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 # http://selenium-python.readthedocs.org/en/latest/api.html
 caps = DesiredCapabilities.CHROME
-myselenium = 'http://localhost:4444/wd/hub'
+sel_host = os.environ.get('SEL_HOST','localhost')
+sel_port = os.environ.get('SEL_PORT','4444')
+myselenium = "http://%s:%s/wd/hub" % (sel_host, sel_port)
 
 # http://selenium-python.readthedocs.org/en/latest/getting-started.html#using-selenium-with-remote-webdriver
 driver = webdriver.Remote(command_executor=myselenium, desired_capabilities=caps)
