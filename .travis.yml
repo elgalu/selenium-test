@@ -11,7 +11,7 @@ services:
   - docker
 
 env:
-  - CONT=grid SEL_IMG_TAG=latest SEL_HOST=localhost SEL_PORT=24444
+  - CONT=grid SEL_IMG_TAG=latest SEL_HOST=127.0.0.1 SEL_PORT=24444
 
 # When I try to map ports `-p ${SEL_PORT}:${SEL_PORT}` I get
 #   Error response from daemon: Cannot start container 9da9d7a1176: iptables
@@ -23,7 +23,7 @@ before_install:
   - sudo apt-get update -qqy
   - sudo apt-get install -qqy jq
   - docker pull elgalu/selenium:${SEL_IMG_TAG}
-  - docker run --name=${CONT} -d elgalu/selenium:${SEL_IMG_TAG}
+  - docker run --name=${CONT} -d -p 127.0.0.1:80:24444 elgalu/selenium:${SEL_IMG_TAG}
   - docker images
   - docker ps -a
   - sleep 5
@@ -42,7 +42,7 @@ install:
 
 script:
   - echo "${SEL_STATUS_URL}"
-  - SEL_HOST=localhost python hola.py
+  - SEL_HOST=127.0.0.1 SEL_PORT=80 python hola.py
 
 after_script:
   - docker stop ${CONT}

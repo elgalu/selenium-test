@@ -2,15 +2,15 @@
 
 Hello world selenium test
 
-## Requisistes
-
-    python --version #=> Python 2.7
-    sudo pip install --upgrade -r requirements.txt
-
 ## Clone
 
     git clone https://github.com/elgalu/selenium-test.git
     cd selenium-test
+
+## Requisistes
+Add `sudo` only if you get permission denied.
+
+    pip install --upgrade -r requirements.txt
 
 ## Run
 
@@ -33,6 +33,8 @@ Sample output
 ## Sauce Labs
 Works in Sauce Labs via http basic auth:
 
+    export SAUCE_USER="your-sauce-labs-user"
+    export SAUCE_KEY="****your-secret****"
     export SEL_HOST="${SAUCE_USER}:${SAUCE_KEY}@ondemand.saucelabs.com"
     export SEL_PORT=80
     python hola.py
