@@ -1,6 +1,8 @@
-# selenium-test [![Build Status](https://travis-ci.org/elgalu/selenium-test.svg?branch=master)](https://travis-ci.org/elgalu/selenium-test)
+# selenium-test
 
-Hello world selenium test
+Hello world selenium test.
+
+If you want to see this running inside a docker container visit [selenium-test-dockerized][]
 
 ## Clone
 
@@ -38,3 +40,6 @@ Works in Sauce Labs via http basic auth:
     export SEL_HOST="${SAUCE_USER}:${SAUCE_KEY}@ondemand.saucelabs.com"
     export SEL_PORT=80
     python hola.py
+
+
+[selenium-test-dockerized]: https://github.com/elgalu/selenium-test-dockerized
