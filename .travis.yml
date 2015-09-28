@@ -10,10 +10,8 @@ python:
 services:
   - docker
 
-# Difference from selenium-test-dockerized, will pull
-#   SEL_TEST_IMG_TAG=latest instead of building locally
 env:
-  - SEL_IMG_TAG=latest SEL_TEST_IMG_TAG=latest
+  - SEL_IMG_TAG=latest SEL_TEST_IMG_TAG=local
 
 # When I try to map ports `-p ${SEL_PORT}:${SEL_PORT}` I get
 #   Error response from daemon: Cannot start container 9da9d7a1176: iptables
@@ -21,16 +19,12 @@ env:
 #   -p tcp -d 172.17.0.1 --dport 24444 -j ACCEPT:
 #   iptables: No chain/target/match by that name. (exit status 1)
 # To avoid `Unable to locate package jq` 1st is necessary to `apt-get update`
-# Difference from selenium-test-dockerized, will pull
-#   SEL_TEST_IMG_TAG=latest instead of building locally
 before_install:
-  - docker pull elgalu/selenium-test:${SEL_TEST_IMG_TAG}
+  - docker build -t="elgalu/selenium-test:${SEL_TEST_IMG_TAG}" .
   - docker pull elgalu/selenium:${SEL_IMG_TAG}
 
-# If we don't increase MAX_INSTANCES and MAX_SESSIONS we get
-#   Error forwarding the new session Empty pool of VM for setup Capabilities
 install:
-  - docker run --privileged --name=myselenium -d -e MAX_INSTANCES=9 -e MAX_SESSIONS=9 elgalu/selenium:${SEL_IMG_TAG}
+  - docker run --privileged --name=myselenium -d elgalu/selenium:${SEL_IMG_TAG}
   - docker exec myselenium wait_all_done 15s || true
   - docker exec myselenium errors || true
   - docker logs myselenium

@@ -14,12 +14,20 @@ Add `sudo` only if you get permission denied.
 
     pip install --upgrade -r requirements.txt
 
+It needs a selenium server, for example [docker-selenium][]
+
+    docker run -d --name=myselenium elgalu/selenium:latest
+    docker exec myselenium wait_all_done 30s
+    export SEL_HOST=$(docker inspect -f='{{.NetworkSettings.IPAddress}}' myselenium)
+    export SEL_PORT=24444
+
 ## Run
 
     python hola.py
 
 Sample output
 
+    Will connect to selenium at http://172.17.0.6:24444/wd/hub
     Opening page http://www.google.com/adwords
     Current title: Google AdWords | Pay-per-Click-Onlinewerbung auf Google (PPC)
     Asserting 'Google Adwords' in driver.title
@@ -41,5 +49,16 @@ Works in Sauce Labs via http basic auth:
     export SEL_PORT=80
     python hola.py
 
+## With docker
+### Build
+
+    docker build -t="elgalu/selenium-test" .
+
+### Run
+
+    export SEL_HOST=$(docker inspect -f='{{.NetworkSettings.IPAddress}}' myselenium)
+    docker run --rm --name=test1 -ti -e SEL_HOST elgalu/selenium-test
+
 
 [selenium-test-dockerized]: https://github.com/elgalu/selenium-test-dockerized
+[docker-selenium]: https://github.com/elgalu/docker-selenium
