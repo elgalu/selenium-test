@@ -1,4 +1,4 @@
-# selenium-test
+# selenium-test [![Build Status](https://travis-ci.org/elgalu/selenium-test.svg?branch=master)](https://travis-ci.org/elgalu/selenium-test)
 
 Hello world selenium test.
 
