@@ -24,8 +24,8 @@ before_install:
   - docker pull elgalu/selenium:${SEL_IMG_TAG}
 
 install:
-  - docker run --privileged --name=myselenium -d -e VIDEO=true elgalu/selenium:${SEL_IMG_TAG}
-  - docker exec myselenium wait_all_done 15s || true
+  - docker run --privileged --name=myselenium -d -e WAIT_TIMEOUT=20s -e VIDEO=true elgalu/selenium:${SEL_IMG_TAG}
+  - docker exec myselenium wait_all_done 40s || true
   - docker exec myselenium errors || true
   - docker logs myselenium
 
