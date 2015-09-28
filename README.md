@@ -2,7 +2,7 @@
 
 Hello world selenium test.
 
-If you want to see this running inside a docker container visit [selenium-test-dockerized][]
+If you want to see this running inside a docker container visit [selenium-test-dockerized][] or scroll down to the *Docker* section.
 
 ## Clone
 
@@ -49,7 +49,7 @@ Works in Sauce Labs via http basic auth:
     export SEL_PORT=80
     python hola.py
 
-## With docker
+## Docker
 ### Build
 
     docker build -t="elgalu/selenium-test" .
